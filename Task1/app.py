@@ -11,9 +11,10 @@ app = Flask(__name__)
 def home():
     hostname = getenv('HOSTNAME')
     name = getenv('YOUR_NAME')
+    text = "This is a new paragraph"
     if name is None:
       name = "friend"
-    return f"<h1>Hello {name}.</h1>\n\n<h2>I'm currently running in {hostname}.</h2>\n"
+    return f"<h1>Hello {name}.</h1>\n\n<h2>I'm currently running in {hostname}.</h2>\n<p>{text}</p>\n"
 
 if __name__=='__main__':
   app.run(host='0.0.0.0', port=5500, debug=True)
