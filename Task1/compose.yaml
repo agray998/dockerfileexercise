@@ -6,6 +6,8 @@ services:
     - task1
   proxy:
     image: nginx
+    ports:
+    - "80:80"
     networks:
     - task1
     volumes:
