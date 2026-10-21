@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from os import getenv
 
@@ -21,6 +21,16 @@ class Users(db.Model):
 def hello():
   data1 = Users.query.all()
   return render_template('home.html', data1=data1)
+
+@app.route('/add', methods=['POST'])
+def add_user():
+	user = request.get_json()
+	try
+	  db.session.add(Users(**user))
+	  db.session.commit()
+	except:
+	  db.session.rollback()
+	return redirect(url_for('hello'))
 
 if __name__=='__main__':
   app.run(host='0.0.0.0', port=5000, debug=True)
