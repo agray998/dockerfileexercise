@@ -15,7 +15,8 @@ services:
       PASSWORD: ${PASSWORD}
     networks:
     - task2
-    depends_on: mysql
+    depends_on: 
+    - mysql
   proxy:
     image: nginx
     ports:
@@ -26,7 +27,8 @@ services:
     - type: bind
       source: nginx/nginx.conf
       target: /etc/nginx/nginx.conf
-    depends_on: flask-app
+    depends_on: 
+    - flask-app
 networks:
   task2:
 volumes:
