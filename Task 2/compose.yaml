@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: task2-db
+    build: db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASSWORD}
+    networks:
+    - task2
+    volumes:
+    - task2:/var/lib/mysql
+  flask-app:
+    image: task2-app
+    build: flask-app
+    environment:
+      PASSWORD: ${PASSWORD}
+    networks:
+    - task2
+    depends_on: mysql
+  proxy:
+    image: nginx
+    ports:
+    - "80:80"
+    networks:
+    - task2
+    volumes:
+    - type: bind
+      source: nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+    depends_on: flask-app
+networks:
+  task2:
+volumes:
+  task2:
