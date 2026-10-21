@@ -25,7 +25,7 @@ def hello():
 @app.route('/add', methods=['POST'])
 def add_user():
 	user = request.get_json()
-	try
+	try:
 	  db.session.add(Users(**user))
 	  db.session.commit()
 	except:
