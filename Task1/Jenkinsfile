@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        dockerhub = credentials('dockerhub')
+    }
 
     stages {
         // stage('Checkout') {
@@ -20,6 +23,15 @@ pipeline {
                 dir('Task1') {
                     sh 'docker compose -f compose.yaml build'
                 }   
+            }
+        }
+        stage('Push images') {
+            steps {
+                dir('Task1') {
+                    sh "docker login -u ${dockerhub_USR} -p {dockerhub_PSW}"
+                    sh "docker compose -f compose.yaml push"
+                    sh "docker logout"
+                }
             }
         }
         stage('Deploy') {
