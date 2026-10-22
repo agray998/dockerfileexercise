@@ -1,6 +1,6 @@
 services:
   flask-app:
-    image: task1-app
+    image: ${dockerhub_USR}/task1-app
     build: .
     networks:
     - task1
