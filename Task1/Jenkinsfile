@@ -13,7 +13,6 @@ pipeline {
                 dir('Task1') {
                     sh "docker compose -f compose.yaml down --rmi=all"
                 }
-                cleanWs()
             }
         }
         stage('Build') {
