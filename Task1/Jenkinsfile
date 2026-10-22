@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        // stage('Checkout') {
+        //     steps {
+        //         git url: 'https://github.com/agray998/dockerfileexercise',
+        //             branch: 'main'
+        //     }
+        // }
+        stage('Build') {
+            steps {
+                dir('Task1') {
+                    sh 'docker compose -f compose.yaml build'
+                }   
+            }
+        }
+        stage('Deploy') {
+            steps {
+                dir('Task1') {
+                    sh "docker compose -f compose.yaml up -d"
+                }
+            }
+        }
+    }
+}
