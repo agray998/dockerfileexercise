@@ -8,6 +8,14 @@ pipeline {
         //             branch: 'main'
         //     }
         // }
+        stage('Reset') {
+            steps {
+                dir('Task1') {
+                    sh "docker compose -f compose.yaml down --rmi"
+                }
+                cleanWs()
+            }
+        }
         stage('Build') {
             steps {
                 dir('Task1') {
