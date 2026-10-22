@@ -11,7 +11,7 @@ pipeline {
         stage('Reset') {
             steps {
                 dir('Task1') {
-                    sh "docker compose -f compose.yaml down --rmi"
+                    sh "docker compose -f compose.yaml down --rmi=all"
                 }
                 cleanWs()
             }
